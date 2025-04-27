@@ -34,12 +34,24 @@ def store_user(userName,userPassword):
 
 
 #  route stuff
-@app.route('/',methods=('GET','POST'))
-def signIn():
+@app.route('/signUp',methods=('GET','POST'))
+def signUp():
     form = UserDataInput()
     if form.validate_on_submit():
-        store_user(form.userName,form.userPassword)
+        store_user(form.userName.data,form.userPassword.data)
         return redirect('/idk')
-    return render_template('index.html',form=form)
+    return render_template('createAccount.html',form=form)
+# flow should be log in -> createAccount OR success login
+
+@app.route('/',methods=('GET','POST'))
+def logIn():
+    form= UserDataInput()
+    if form.validate_on_submit():
+        return redirect('/home')
+    return render_template('logIn.html',form=form)
+    
+@app.route('/home')
+def home():
+    return render_template('home.html')
 
 
