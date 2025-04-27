@@ -11,7 +11,7 @@
     <div class="container mb-4">  
       <div class="card mt-4">
         <div class="card-body">
-          <h2 class="card-title">Make a user?</h2>
+          <h2 class="card-title">Log in a user?</h2>
           <form method="POST" action="/">
             {{ form.csrf_token }}
             {{ form.userName.label }} 
@@ -25,6 +25,9 @@
           </form>
         </div>
       </div>
+      <p>Don't have an account? 
+        <a href="/signUp">Sign up here</a>
+    </p>
     </div>
 
 

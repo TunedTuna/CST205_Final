@@ -4,6 +4,8 @@ from wtforms import StringField, SubmitField, PasswordField
 from wtforms.validators import DataRequired
 from datetime import datetime
 
+# from user_manager import... [this will import methods from the user_manager.py]
+
 from flask_bootstrap import Bootstrap5
 
 # create an instance of Flask
@@ -41,7 +43,6 @@ def signUp():
         store_user(form.userName.data,form.userPassword.data)
         return redirect('/idk')
     return render_template('createAccount.html',form=form)
-# flow should be log in -> createAccount OR success login
 
 @app.route('/',methods=('GET','POST'))
 def logIn():
