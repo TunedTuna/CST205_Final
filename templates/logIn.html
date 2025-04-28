@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>CST 205 FInal project</title>
+      {{ bootstrap.load_css() }}
+  </head>
+<body>
+  
+    <div class="container mb-4">  
+      <div class="card mt-4">
+        <div class="card-body">
+          <h2 class="card-title">Log in a user?</h2>
+          <form method="POST" action="/">
+            {{ form.csrf_token }}
+            {{ form.userName.label }} 
+            {{ form.userName(size=32) }}
+            <br>
+            {{ form.userPassword.label }} 
+            {{ form.userPassword(size=32) }}
+
+       
+            <input type="submit" value="Submit">
+          </form>
+        </div>
+      </div>
+      <p>Don't have an account? 
+        <a href="/signUp">Sign up here</a>
+    </p>
+    </div>
+
+
+</body>
+</html>
