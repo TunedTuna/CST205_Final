@@ -3,33 +3,44 @@
   <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>CST 205 FInal project</title>
+      <title>CST 205 Final project</title>
       {{ bootstrap.load_css() }}
+      <style>
+      body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .card {
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
+      }
+    </style>
   </head>
 <body>
-  
-    <div class="container mb-4">  
-      <div class="card mt-4">
-        <div class="card-body">
-          <h2 class="card-title">Log in a user?</h2>
-          <form method="POST" action="/">
-            {{ form.csrf_token }}
-            {{ form.userName.label }} 
-            {{ form.userName(size=32) }}
-            <br>
-            {{ form.userPassword.label }} 
-            {{ form.userPassword(size=32) }}
-
-       
-            <input type="submit" value="Submit">
-          </form>
+    <div class = "card">
+      <h2 class = "text-center"> Log In</h2>
+      <form method = "POST" action = "/">
+        <div class = "mb-4">
+          {{ form.csrf_token }}
+          {{form.userName.label}}
+          <br>
+          {{form.userName(size = 32)}}
+          <br>
+          {{ form.userPassword.label }} 
+          <br>
+          {{ form.userPassword(size=32) }}
         </div>
+        <div class = "d-grid">
+          <input type="submit" value="Submit" class="btn btn-success">
+        </div>
+      </form>
+      <div>
+        <p>Don't have an account? 
+          <a href="/signUp">Sign up</a>
+      </p>
       </div>
-      <p>Don't have an account? 
-        <a href="/signUp">Sign up here</a>
-    </p>
-    </div>
-
-
 </body>
 </html>
