@@ -3,6 +3,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField
 from wtforms.validators import DataRequired
 from datetime import datetime
+from flask import *
+import os
 
 # from user_manager import... [this will import methods from the user_manager.py]
 
@@ -13,6 +15,8 @@ app= Flask(__name__)
 
 app.config['SECRET_KEY']= 'csumb-otter'
 bootstrap = Bootstrap5(app)
+UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'uploads')
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 class UserDataInput(FlaskForm):
     userName= StringField(
@@ -55,4 +59,26 @@ def logIn():
 def home():
     return render_template('home.html')
 
+@app.route("/upload")
+def main():
+    return render_template("upload.html")
 
+@app.route("/success", methods=["POST"])
+def success():
+    if 'file' not in request.files:
+        return "No file uploaded"
+
+    image = request.files['file']
+    if image.filename == '':
+        return "No file selected"
+
+    file_path = os.path.join(UPLOAD_FOLDER, image.filename)
+    image.save(file_path)
+    print(f"File saved to {file_path}")
+    return render_template("acknowledgement.html", filename=image.filename)
+
+
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
