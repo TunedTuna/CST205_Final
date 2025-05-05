@@ -3,7 +3,7 @@
   <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>CST 205 Final project</title>
+      <title>Log In</title>
       {{ bootstrap.load_css() }}
       <style>
       body {
@@ -23,16 +23,19 @@
     <div class = "card">
       <h2 class = "text-center"> Log In</h2>
       <form method = "POST" action = "/">
-        <div class = "mb-4">
+        <div class="mb-4">
           {{ form.csrf_token }}
-          {{form.userName.label}}
-          <br>
-          {{form.userName(size = 32)}}
-          <br>
-          {{ form.userPassword.label }} 
-          <br>
-          {{ form.userPassword(size=32) }}
-        </div>
+          <div class="mb-3">
+            {{ form.userName.label(class="form-label") }}
+            {{ form.userName(class="form-control", size=32) }}
+          </div>
+        
+          <div class="mb-3">
+            {{ form.userPassword.label(class="form-label") }}
+            {{ form.userPassword(class="form-control", size=32) }}
+          </div>
+        
+        </div> 
         <div class = "d-grid">
           <input type="submit" value="Submit" class="btn btn-success">
         </div>

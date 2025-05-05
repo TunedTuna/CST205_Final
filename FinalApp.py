@@ -41,7 +41,7 @@ def signUp():
     form = UserDataInput()
     if form.validate_on_submit():
         store_user(form.userName.data,form.userPassword.data)
-        return redirect('/idk')
+        return redirect('/home')
     return render_template('createAccount.html',form=form)
 
 @app.route('/',methods=('GET','POST'))
@@ -54,5 +54,9 @@ def logIn():
 @app.route('/home')
 def home():
     return render_template('home.html')
+
+@app.route('/profile', methods=('GET','POST'))
+def profile():
+    return render_template('profile.html')
 
 

@@ -3,9 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home Page</title>
+    {{ bootstrap.load_css() }}
+    <style>
+        body {
+            /* background-color: lightblue;  */
+            margin: 0; 
+            height: 100vh; 
+        }
+        .intro {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .card {
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
+      }
+    </style>
 </head>
 <body>
-    my house!
+    <nav class="navbar navbar-expand-lg ">
+        <div class="container-fluid">
+          <a class="navbar-brand">Online Image Editor & Converter</a>
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/home">Home</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link text-dark" href="/profile"> Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link - text-dark" href = "/"> Log In</a>
+            </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+    <div class = "container mb-4"> 
+        <div class="text-left">
+            <div>Upload an Image</div>
+                <input type="file" name="image" accept="image/1" required>
+            <br>
+            <br>
+            <div> Please select an image filter </div>
+            <select class="form-select">
+                <option selected> None </option>
+                <option value="1">Sepia</option>
+                <option value="2">Negative</option>
+                <option value="3">Grayscale</option>
+              </select>
+              <br>
+              <div> Change the size of Image </div>
+              <div class="form-floating mb-3">
+                <input type="number" class="form-control">
+                <label for="floatingInput">Width</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="number" class="form-control">
+                <label for="floatingInput">Height</label>
+              </div>
+              <div> Please select an image format </div>
+            <select class="form-select">
+                <option selected> Default </option>
+                <option value="1">webp</option>
+                <option value="2">jpeg</option>
+                <option value="3">png</option>
+              </select>
+              <br>
+              <input type="submit" value="Submit" class="btn btn-primary">
+        </div>
+    </div>
 </body>
 </html>
