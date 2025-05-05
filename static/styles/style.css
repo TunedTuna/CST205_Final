@@ -1,0 +1,116 @@
+:root {
+
+    --primary-color: #f6f7fb;
+    --secondary-color: #ffffff;
+    --border-color: #f0f1f6;
+  
+    --text-color-1: #333336;
+    --text-color-2: #82828b;
+    --text-color-3: #5a5a61;
+    --text-color-4: #3c3c42;
+
+    --alert-bg: rgba(82, 192, 255, 0.15);
+    --alert-border: #52c0ff;
+    --alert-text: #006ead;
+
+    --button: #008cff;
+    --button-hover: #36a5ff;
+
+    --form-typing: #3573FF;
+
+    --bs-card-border-color: var(--primary-color);
+
+}
+
+/* Dark Mode */
+
+@media (prefers-color-scheme: dark) {
+
+    :root {
+
+        --primary-color: #1c1f2a;
+        --secondary-color: #25293a;
+        --border-color: #2f3448;
+      
+        --text-color-1: #ffffff;
+        --text-color-2: #7a809d;
+        --text-color-3: #5a5a61;
+        --text-color-4: #a5add4;
+    
+        --alert-bg: rgba(82, 192, 255, 0.25);
+        --alert-border: #52c0ff;
+        --alert-text: #72cbff;
+    
+        --button: #3dc5ff;
+        --button-hover: #6ad2ff;
+    
+    }
+    
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
+
+body {
+
+    min-height: 100vh;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    margin: 0;
+    padding: 0;
+
+    background-color: var(--primary-color);
+
+    transition: 0.5s;
+
+}
+
+.card {
+
+    padding: 3rem;
+    border-radius: 13px;
+
+    background-color: var(--secondary-color);
+    border: 2px solid var(--border-color);
+
+}
+
+h2 {
+    font-size: 30px;
+    margin-bottom: 25px;
+}
+
+label {
+    color: var(--text-color-2);
+    margin-bottom: 7px;
+}
+
+input {
+
+    padding: 7px;
+    font-size: 13px;
+
+    width: 375px;
+
+    color: var(--text-color-2);
+    background-color: var(--primary-color);
+
+    border: none;
+    border-radius: 7px;
+
+    transition: .15s;
+
+}
+
+input:focus {
+    outline: 2px solid var(--form-typing);
+    color: var(--text-color-3);
+}
+
+.d-grid {
+    margin-bottom: 20px;
+}
