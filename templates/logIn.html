@@ -1,41 +1,35 @@
 <!doctype html>
+
 <html lang="en">
+
   <head>
+
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>Log In</title>
+      <title>CST 205 Final project</title>
       {{ bootstrap.load_css() }}
-      <style>
-      body {
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .card {
-        padding: 2rem;
-        border-radius: 12px;
-        box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
-      }
-    </style>
+
+      <link rel="stylesheet" href="static/styles/style.css">
+
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+
   </head>
 <body>
     <div class = "card">
       <h2 class = "text-center"> Log In</h2>
       <form method = "POST" action = "/">
-        <div class="mb-4">
+        <div class = "mb-4">
           {{ form.csrf_token }}
-          <div class="mb-3">
-            {{ form.userName.label(class="form-label") }}
-            {{ form.userName(class="form-control", size=32) }}
-          </div>
-        
-          <div class="mb-3">
-            {{ form.userPassword.label(class="form-label") }}
-            {{ form.userPassword(class="form-control", size=32) }}
-          </div>
-        
-        </div> 
+          {{form.userName.label}}
+          <br>
+          {{form.userName(size = 32)}}
+          <br>
+          {{ form.userPassword.label }} 
+          <br>
+          {{ form.userPassword(size=32) }}
+        </div>
         <div class = "d-grid">
           <input type="submit" value="Submit" class="btn btn-success">
         </div>
