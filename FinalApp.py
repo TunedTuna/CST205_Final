@@ -59,4 +59,6 @@ def logIn():
 def home():
     return render_template('home.html')
 
-
+@app.route('/profile', methods=('GET','POST'))
+def profile():
+    return render_template('profile.html')
