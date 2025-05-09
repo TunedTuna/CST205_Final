@@ -35,4 +35,12 @@ def addUser(newUserName, newPassword):
     with open("user_data.json", "w") as file:
         json.dump(users, file, indent=2)
 
+def checkLogin(inputUserName,inputPassword):
+    # if user exists, return their userName else return none
+    data= json.load(open('user_data.json'))
+    for user in data:
+        if inputUserName == user["userName"] and inputPassword==user["password"]:
+            return user["userName"]
+    return None
+
 

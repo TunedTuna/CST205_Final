@@ -5,6 +5,8 @@ from wtforms.validators import DataRequired
 from datetime import datetime
 from flask import *
 import os
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user, UserMixin
+
 
 # from user_manager import... [this will import methods from the user_manager.py]
 import user_manager
@@ -29,6 +31,7 @@ class UserDataInput(FlaskForm):
         validators=[DataRequired()]
     )
 
+# i don't think this gets used anymore...?
 userDataList= []
 
 def store_user(userName,userPassword):
@@ -39,6 +42,26 @@ def store_user(userName,userPassword):
 
     ))
 
+# flask_login stuff
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = '/' 
+# flask_login stuff - class?
+class User(UserMixin):
+    def __init__(self, userName):
+        self.id= userName 
+
+# flask_login stuff - their method?
+@login_manager.user_loader
+def load_user(user_id):
+    with open("user_data.json", "r") as file:
+        users = json.load(file)
+        for user in users:
+            if user["userName"] == user_id:
+                print("im in loader!")
+                return User(user_id)
+    print("im out of  loader...")
+    return None
 
 #  route stuff
 @app.route('/signUp',methods=('GET','POST'))
@@ -66,10 +89,18 @@ def signUp():
 def logIn():
     form= UserDataInput()
     if form.validate_on_submit():
-        return redirect('/home')
+        userName= user_manager.checkLogin(form.userName.data,form.userPassword.data)
+        if userName:
+            login_user(User(userName))
+            print(f'LOGIN SUCCESSFUL: user_id = {userName}')
+
+            return redirect('/home')
+        else:
+             flash("Invalid username or password")
     return render_template('logIn.html',form=form)
     
 @app.route('/home')
+@login_required
 def home():
     return render_template('home.html')
 
