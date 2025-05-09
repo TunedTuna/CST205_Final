@@ -1,6 +1,6 @@
 # this file will handle the checks n stuff for user log in
 # this file will import the file that holds userData
-# CST 205 APIs
+#Lecture: CST 205 APIs
 import json
 data= json.load(open('user_data.json'))
 

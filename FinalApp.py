@@ -105,10 +105,12 @@ def home():
     return render_template('home.html')
 
 @app.route("/upload")
+@login_required
 def main():
     return render_template("upload.html")
 
 @app.route("/success", methods=["POST"])
+@login_required
 def success():
     if 'file' not in request.files:
         return "No file uploaded"
