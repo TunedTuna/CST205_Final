@@ -7,6 +7,7 @@ from flask import *
 import os
 
 # from user_manager import... [this will import methods from the user_manager.py]
+import user_manager
 
 from flask_bootstrap import Bootstrap5
 
@@ -42,6 +43,7 @@ def store_user(userName,userPassword):
 #  route stuff
 @app.route('/signUp',methods=('GET','POST'))
 def signUp():
+    user_manager.test_lookInJson()
     form = UserDataInput()
     if form.validate_on_submit():
         store_user(form.userName.data,form.userPassword.data)
