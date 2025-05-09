@@ -9,3 +9,30 @@ data= json.load(open('user_data.json'))
 def test_lookInJson():
     for user in data:
         print(f'{user["userName"]}')
+
+def checkDupe(tempUserName):
+    # reload json incase new info
+    data= json.load(open('user_data.json'))
+
+    # checks for duplicates True = dupe, False = no dupe
+    for user in data:
+        print(f'CHECKING: {tempUserName}')
+        if user["userName"] == tempUserName :
+            return True
+    return False
+
+def addUser(newUserName, newPassword):
+    new_user={
+        "userName":newUserName,
+        "password":newPassword
+    }
+    #lecture: The Python Programming Language (Part 3)
+    with open("user_data.json", "r") as file:
+        users = json.load(file)
+
+    users.append(new_user)
+
+    with open("user_data.json", "w") as file:
+        json.dump(users, file, indent=2)
+
+

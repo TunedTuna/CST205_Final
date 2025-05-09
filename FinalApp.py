@@ -43,11 +43,23 @@ def store_user(userName,userPassword):
 #  route stuff
 @app.route('/signUp',methods=('GET','POST'))
 def signUp():
-    user_manager.test_lookInJson()
+
     form = UserDataInput()
-    if form.validate_on_submit():
-        store_user(form.userName.data,form.userPassword.data)
-        return redirect('/idk')
+    if form.validate_on_submit(): #when user hits "enter"
+        print(f'Form submitted username: {form.userName.data}')
+
+        if not user_manager.checkDupe(form.userName.data):
+            # user is UNIQUE-ish store them in "DB"
+            user_manager.addUser(form.userName.data,form.userPassword.data)
+            store_user(form.userName.data,form.userPassword.data)
+            return redirect('/home')
+        else:
+            # display error
+            #reload page to refresh input?
+            print("whoopsies, user exists...")
+            return redirect('/signUp')
+           
+        
     return render_template('createAccount.html',form=form)
 
 @app.route('/',methods=('GET','POST'))
