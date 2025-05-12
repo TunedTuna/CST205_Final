@@ -1,0 +1,21 @@
+{
+  "JJJdoe": [
+    {
+      "date": "010101",
+      "userName": "JJJdoe",
+      "filter": "bw"
+    },
+    {
+      "date": "010201",
+      "userName": "JJJdoe",
+      "filter": "bw"
+    }
+  ],
+  "JaneDough": [],
+  "aaa": [
+    {
+      "date": "020202",
+      "filter": "binary"
+    }
+  ]
+}

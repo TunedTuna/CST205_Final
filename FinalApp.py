@@ -10,6 +10,7 @@ from flask_login import LoginManager, login_user, login_required, logout_user, c
 
 # from user_manager import... [this will import methods from the user_manager.py]
 import user_manager
+import history_manager
 
 from flask_bootstrap import Bootstrap5
 
@@ -58,9 +59,8 @@ def load_user(user_id):
         users = json.load(file)
         for user in users:
             if user["userName"] == user_id:
-                print("im in loader!")
+                history_manager.test_look_in_json()
                 return User(user_id)
-    print("im out of  loader...")
     return None
 
 #  route stuff
@@ -94,6 +94,7 @@ def logIn():
             login_user(User(userName))
             print(f'LOGIN SUCCESSFUL: user_id = {userName}')
 
+            history_manager.add_to_user_history(current_user.id, "020202","binary") #
             return redirect('/home')
         else:
              flash("Invalid username or password")
@@ -102,7 +103,10 @@ def logIn():
 @app.route('/home')
 @login_required
 def home():
-    return render_template('home.html')
+    # how to call the user history
+    user= current_user.id
+    history= history_manager.display_user_history(user)
+    return render_template('home.html',history=history)
 
 @app.route("/upload")
 @login_required

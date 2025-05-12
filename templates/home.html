@@ -10,5 +10,13 @@
   Logged in as: <strong>{{ current_user.id }}</strong>
 </div>
     my house!
+
+    <h2>History for {{ current_user.id }}</h2>
+<ul>
+  {% for record in history %}
+    <li>{{ record.date }} - {{ record.filter }}</li>
+  {% endfor %}
+</ul>
+
 </body>
 </html>
