@@ -5,59 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     {{ bootstrap.load_css() }}
+    
 </head>
 <body>
     <nav class="navbar navbar-expand-lg ">
         <div class="container-fluid">
-          <a class="navbar-brand">Online Image Editor & Converter</a>
-          <ul class="nav nav-tabs">
+          <a class="navbar-brand"><h1>Welcome Back, {{ current_user.id }}</h1></a>
+          <ul class="nav nav-underline">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/home">Home</a>
             </li>
             <li class="nav-item ">
               <a class="nav-link text-dark" href="/profile"> Profile</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link - text-dark" href = "/"> Log In</a>
+            <li class="nav-item ">
+              <a class="btn btn-primary" href = "/"> Log Out</a>
             </li>
+
             </ul>
           </div>
         </div>
     </nav>
-
-    <div class = "container mb-4"> 
-        <div class="text-left">
-            <div>Upload an Image</div>
-                <input type="file" name="image" accept="image/*" required>
-            <br>
-            <br>
-            <div> Please select an image filter </div>
-            <select class="form-select">
-                <option selected> None </option>
-                <option value="1">Sepia</option>
-                <option value="2">Negative</option>
-                <option value="3">Grayscale</option>
-              </select>
-              <br>
-              <div> Change the size of Image </div>
-              <div class="form-floating mb-3">
-                <input type="number" class="form-control">
-                <label for="floatingInput">Width</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="number" class="form-control">
-                <label for="floatingInput">Height</label>
-              </div>
-              <div> Please select an image format </div>
-            <select class="form-select">
-                <option selected> Default </option>
-                <option value="1">webp</option>
-                <option value="2">jpeg</option>
-                <option value="3">png</option>
-              </select>
-              <br>
-              <input type="submit" value="Submit" class="btn btn-primary">
+    <div class="card text-center">
+      <img src="/static/images/page.jpg" class="card-img" alt="home_page">
+      <div class="card-img-overlay">
+        <h1>Online Image Editor & Converter</h1>
+        <h4>Upload an image:</h4>
+        <div class="d-flex justify-content-center">
+        <form method="post" action="/edit" enctype="multipart/form-data"> 
+          <input type="file" name="file" class="form-control mb-3 w-100 " />
+          <input type="submit" value="Upload" class="btn btn-primary">
+        </form>
+      </div>
+        <br>
+        <div class = "d-flex justify-content-center">
+        <div class="card-group w-60">
+          <div class="card w-50">
+            <div class="card-body">
+              <h5 class="card-title">History</h5>
+              <p class="card-text">Access your recent edits</p>
+            </div>
+          </div>
+          <div class = "card">
+            <div class="card-body ">
+              <h5 class="card-title">Edit</h5>
+              <p class="card-text">Apply filters, resize and convert image format</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Download</h5>
+              <p class="card-text">Save your edited images instantly</p>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+    
+    </div>
     </div>
 </body>
 </html>
