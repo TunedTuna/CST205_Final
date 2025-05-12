@@ -94,7 +94,7 @@ def logIn():
             login_user(User(userName))
             print(f'LOGIN SUCCESSFUL: user_id = {userName}')
 
-            history_manager.add_to_user_history(current_user.id, "020202","binary") #
+            # history_manager.add_to_user_history(current_user.id, "020202","binary") #example of how to use
             return redirect('/home')
         else:
              flash("Invalid username or password")
@@ -103,10 +103,11 @@ def logIn():
 @app.route('/home')
 @login_required
 def home():
-    # how to call the user history
-    user= current_user.id
-    history= history_manager.display_user_history(user)
-    return render_template('home.html',history=history)
+    # how to call the user history/ move this block to appropriate History thingy
+    # user= current_user.id
+    # history= history_manager.display_user_history(user) #example of how to use 
+    #  return render_template('home.html',history=history)
+    return render_template('home.html')
 
 @app.route("/upload")
 @login_required
