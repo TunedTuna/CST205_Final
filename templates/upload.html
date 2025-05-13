@@ -16,8 +16,11 @@
           <div class="container-fluid">
             <a class="navbar-brand"><h1>Online Image Editor & Converter</h1></a>
             <ul class="nav nav-underline">
+                <li class="nav-item ">
+                    <a class="nav-link text-dark" href="/home"> Home</a>
+                  </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/home">Home</a>
+                <a class="nav-link active" aria-current="page" href="/edit">Editor</a>
               </li>
               <li class="nav-item ">
                 <a class="nav-link text-dark" href="/profile"> Profile</a>
@@ -34,16 +37,14 @@
 
           <div class="text-left">
               
-              {% if filename %}
-
               <hr>
 
-              <h4>Uploaded Image:</h4>
-              <img src="{{ url_for('static', filename='uploads/' ~ filename) }}" alt="Uploaded Image" width="300">
-              <br>
+              <h4>Upload an Image here:</h4>
               <br>
 
-              <form method="POST" enctype="multipart/form-data">
+              <form method="POST" action ="/edit" enctype="multipart/form-data">
+                <input type="file" name="file" class="form-control mb-3 w-100 " required />
+        
                   <div> Please select an image filter </div>
                   <select class="form-select" name = "filter">
                   <option selected> None </option>
@@ -68,7 +69,7 @@
 
               </form>
 
-              {% endif %}
+           
 
           </div>
 

@@ -100,10 +100,18 @@ def logIn():
 
 
 
-@app.route('/home', methods=['GET','POST']) # home (upload image), can be accessed after logging in
+@app.route('/home', methods=['GET','POST']) # home page that user see after log in, can be accessed after logging in
 @login_required
 def home():
+    return render_template('home.html')
 
+
+
+@app.route('/edit', methods = ['GET', 'POST']) # editing the image
+@login_required
+def edit_image():
+
+    # if request.method == 'POST':
     if request.method == 'POST':
      
         if 'file' not in request.files:
@@ -114,33 +122,19 @@ def home():
         if image.filename == '':
             return "No file selected"
 
-        file_path = os.path.join(UPLOAD_FOLDER, image.filename)
-        image.save(file_path)
-        print(f"File saved to {file_path}")
-
-        return redirect(url_for('edit_image', filename=image.filename))
-
-    return render_template('home.html')
-
-
-
-@app.route('/edit', methods = ['GET', 'POST']) # editing the image
-@login_required
-def edit_image():
-
-    if request.method == 'POST':
-
         selectedfilter = request.form.get("filter")
         selectedformat = request.form.get("format", "original")
 
         print(f"User selected filter {selectedfilter} and format {selectedformat}")
 
-        image = request.files['file']
-        filename = image.filename
-
+        image = request.files["file"]
+       
         img = Image.open(image)
-        img = img.convert("RGB")
+        file_path = os.path.join(UPLOAD_FOLDER, image.filename)
+        img.save(file_path)
+        print(f"File saved to {file_path}")
 
+        img = img.convert("RGB")
         width, height = img.size
         width2, height2 = img.size # use later...
 
@@ -164,7 +158,7 @@ def edit_image():
                         r = int(pixel[0] * 1.08)
                         g,b = pixel[1], int(pixel[2] * 0.5)
 
-                    img.putpixel((x, y), (r, g, b))
+                img.putpixel((x, y), (r, g, b))
         
         elif (selectedfilter == "2"): # negative filter
             negativelist = [((255 - p[0]), (255 - p[1]), (255 - p[2])) for p in img.getdata()]
@@ -176,26 +170,24 @@ def edit_image():
 
         if (selectedformat != "original"):
 
-            filename2 = f"{os.path.splitext(filename)[0]}.{selectedformat.lower()}"
+            filename2 = f"{os.path.splitext(image.filename)[0]}.{selectedformat.lower()}"
 
             file_path = os.path.join(UPLOAD_FOLDER, filename2)
             img.save(file_path, format=selectedformat.upper())
-            filename = filename2
+            
 
         else:
+            filename2 = image.filename  
+            file_path = os.path.join(UPLOAD_FOLDER, filename2)
             img.save(file_path)
         
-        print(f"File saved to {file_path}")
-        return redirect(url_for('results', filename=filename))
-        # ISSUE | no idea why but the /edit page just isnt being shown, its like its being skipped and the user just goes from /home to /results.
-        # No idea why but this kind of works, but now the url is wrong, and it is something like "http://127.0.0.1:5000/results?filename=(filename)"
-        # Something to also work on would be the submit button, when, once clicked, just takes you to a page that displays a "Method Not Allowed" error. Awful...
-    
-    return render_template('upload.html', filename=filename)
+            print(f"File saved to {file_path}")
+            return redirect(url_for('results', filename= filename2))
+    return render_template('upload.html')
 
 
 
-@app.route('/results')
+@app.route('/results') # this where one see the image after editing
 @login_required
 def results():
     filename = request.args.get('filename')
