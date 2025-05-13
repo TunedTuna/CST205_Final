@@ -38,35 +38,11 @@
 
               <hr>
 
-              <h4>Uploaded Image:</h4>
               <img src="{{ url_for('static', filename='uploads/' ~ filename) }}" alt="Uploaded Image" width="300">
               <br>
               <br>
 
-              <form method="POST" enctype="multipart/form-data">
-                  <div> Please select an image filter </div>
-                  <select class="form-select" name = "filter">
-                  <option selected> None </option>
-                  <option value="1">Sepia</option>
-                  <option value="2">Negative</option>
-                  <option value="3">Grayscale</option>
-                </select>
-                <br>
-
-                <div> Please select an image format </div>
-
-                  <select class="form-select" name = "format">
-                  <option value = "original"selected> Default </option>
-                  <option value="webp">webp</option>
-                  <option value="jpeg">jpeg</option>
-                  <option value="png">png</option>
-                  </select>
-
-                <br>
-
-                <input type="submit" value="Submit" class="btn btn-success">
-
-              </form>
+              <a>Here is your image :D</a>
 
               {% endif %}
 
