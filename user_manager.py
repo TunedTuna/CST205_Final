@@ -12,7 +12,9 @@ def test_lookInJson():
 
 def checkDupe(tempUserName):
     # reload json incase new info
-    data= json.load(open('user_data.json'))
+    with open('user_data.json', 'r') as file:
+        data = json.load(file)
+    # data= json.load(open('user_data.json'))
 
     # checks for duplicates True = dupe, False = no dupe
     for user in data:
@@ -42,5 +44,3 @@ def checkLogin(inputUserName,inputPassword):
         if inputUserName == user["userName"] and inputPassword==user["password"]:
             return user["userName"]
     return None
-
-

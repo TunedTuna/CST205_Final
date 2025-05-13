@@ -3,12 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home Page</title>
+    {{ bootstrap.load_css() }}
+    
 </head>
 <body>
-    <div class="header">
-  Logged in as: <strong>{{ current_user.id }}</strong>
-</div>
-    my house!
+    <nav class="navbar navbar-expand-lg ">
+        <div class="container-fluid">
+          <a class="navbar-brand"><h1>Welcome Back, {{ current_user.id }}</h1></a>
+          <ul class="nav nav-underline">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/home">Home</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link text-dark" href="/profile"> Profile</a>
+            </li>
+            <li class="nav-item ">
+              <a class="btn btn-primary" href = "/"> Log Out</a>
+            </li>
+
+            </ul>
+          </div>
+        </div>
+    </nav>
+    <div class="card text-center">
+      <img src="/static/images/page.jpg" class="card-img" alt="home_page">
+      <div class="card-img-overlay">
+        <h1>Online Image Editor & Converter</h1>
+        <h4>Upload an image:</h4>
+        <div class="d-flex justify-content-center">
+        <form method="post" action="/edit" enctype="multipart/form-data"> 
+          <input type="file" name="file" class="form-control mb-3 w-100 " />
+          <input type="submit" value="Upload" class="btn btn-primary">
+        </form>
+      </div>
+        <br>
+        <div class = "d-flex justify-content-center">
+        <div class="card-group w-60">
+          <div class="card w-50">
+            <div class="card-body">
+              <h5 class="card-title">History</h5>
+              <p class="card-text">Access your recent edits</p>
+            </div>
+          </div>
+          <div class = "card">
+            <div class="card-body ">
+              <h5 class="card-title">Edit</h5>
+              <p class="card-text">Apply filters, resize and convert image format</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Download</h5>
+              <p class="card-text">Save your edited images instantly</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+    </div>
 </body>
 </html>
