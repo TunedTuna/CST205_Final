@@ -14,5 +14,21 @@
   {
     "userName": "Jasmeen",
     "password": "1234"
+  },
+  {
+    "userName": "john doe",
+    "password": "peepeepoopoo"
+  },
+  {
+    "userName": "greg",
+    "password": "peepeepoopoo"
+  },
+  {
+    "userName": "greg123",
+    "password": "peepeepoopoo"
+  },
+  {
+    "userName": "john",
+    "password": "peepeepoopoo"
   }
 ]

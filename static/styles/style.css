@@ -34,15 +34,15 @@
       
         --text-color-1: #ffffff;
         --text-color-2: #7a809d;
-        --text-color-3: #5a5a61;
-        --text-color-4: #a5add4;
+        --text-color-3: #a0a6c4;
+        --text-color-4: #b9c1e9;
     
         --alert-bg: rgba(82, 192, 255, 0.25);
         --alert-border: #52c0ff;
         --alert-text: #72cbff;
     
-        --button: #3dc5ff;
-        --button-hover: #6ad2ff;
+        --button: #0080FF;
+        --button-hover: #3c9dff;
     
     }
     
@@ -80,6 +80,8 @@ body {
 }
 
 h2 {
+
+    color: var(--text-color-1);
     font-size: 30px;
     margin-bottom: 25px;
 }
@@ -113,4 +115,13 @@ input:focus {
 
 .d-grid {
     margin-bottom: 20px;
+}
+
+.btn {
+    background-color: var(--button);
+    transition: .15s;
+}
+
+.btn:hover {
+    background-color: var(--button-hover);
 }
