@@ -23,7 +23,7 @@ This Flask web application allows users to:
 
 **Requirements (run pip install):**
 - Flask
-- Flask-Bootstrap
+- Bootstrap-Flask
 - Flask-Login
 - Flask-WTF
 - Pillow
