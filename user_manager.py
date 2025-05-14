@@ -1,10 +1,10 @@
-#Image Filter and Format Converter Web Application
-#  CST 205
-# This file will handle the checks n stuff for user log in
-# This file will import the file that holds userData
-#  Daniel
-#  5/14/2025
-#Lecture: CST 205 APIs
+# Image Filter and Format Converter Web Application
+# Class: CST 205
+# Abstract: This file will handle the checks n stuff for user log in
+#           This file will import the file that holds userData
+# Author: Daniel Rodas
+# Date: 5/14/2025
+# Lecture: CST 205 APIs
 
 import json
 import os
