@@ -2,8 +2,12 @@
 # this file will import the file that holds userData
 #Lecture: CST 205 APIs
 import json
-data= json.load(open('user_data.json'))
+import os
 
+base_directory = os.path.dirname(os.path.abspath(__file__))
+user_file = os.path.join(base_directory, 'user_data.json')
+
+data = json.load(open(user_file))
 
 
 def test_lookInJson():
@@ -12,35 +16,34 @@ def test_lookInJson():
 
 def checkDupe(tempUserName):
     # reload json incase new info
-    with open('user_data.json', 'r') as file:
+    with open(user_file, 'r') as file:
         data = json.load(file)
-    # data= json.load(open('user_data.json'))
 
     # checks for duplicates True = dupe, False = no dupe
     for user in data:
         print(f'CHECKING: {tempUserName}')
-        if user["userName"] == tempUserName :
+        if user["userName"] == tempUserName:
             return True
     return False
 
 def addUser(newUserName, newPassword):
-    new_user={
-        "userName":newUserName,
-        "password":newPassword
+    new_user = {
+        "userName": newUserName,
+        "password": newPassword
     }
-    #lecture: The Python Programming Language (Part 3)
-    with open("user_data.json", "r") as file:
+
+    with open(user_file, "r") as file:
         users = json.load(file)
 
     users.append(new_user)
 
-    with open("user_data.json", "w") as file:
+    with open(user_file, "w") as file:
         json.dump(users, file, indent=2)
 
-def checkLogin(inputUserName,inputPassword):
-    # if user exists, return their userName else return none
-    data= json.load(open('user_data.json'))
+
+def checkLogin(inputUserName, inputPassword):
+    data = json.load(open(user_file))
     for user in data:
-        if inputUserName == user["userName"] and inputPassword==user["password"]:
+        if inputUserName == user["userName"] and inputPassword == user["password"]:
             return user["userName"]
     return None
