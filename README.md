@@ -16,8 +16,8 @@ This Flask web application allows users to:
 - View the image history
 - Upload an image from their device
 - Choose an image filter (Sepia, Negative, Grayscale)
-- Convert the image format (e.g., png, jpeg, webp)
-- View the newly filtered image on the results page and, then download it
+- View the newly filtered image on the results page
+- Download the image in png, jpg or webp format
 
 ### How to run the program
 
