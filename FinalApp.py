@@ -48,7 +48,8 @@ class User(UserMixin):
 # flask_login stuff - their method?
 @login_manager.user_loader
 def load_user(user_id):
-    with open("user_data.json", "r") as file:
+    user_data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'user_data.json')
+    with open(user_data_path, "r") as file:
         users = json.load(file)
         for user in users:
             if user["userName"] == user_id:
