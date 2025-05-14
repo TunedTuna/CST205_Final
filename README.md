@@ -30,7 +30,7 @@ This Flask web application allows users to:
 
 **Setup Instructions**
 1. Clone the repository
-2. Install all the requirements above
+2. Install all the requirements above (MAKE SURE TO SET UP A VIRTUAL ENVIRONMENT)
 3. Run the application -  flask --app FinalApp --debug run
 4. Open the browser
 
