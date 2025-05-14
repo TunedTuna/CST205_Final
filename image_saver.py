@@ -1,9 +1,9 @@
 # Image Filter and Format Converter Web Application
-# CST 205
-# This file has the function that enables users to save images in different formats. 
-# It takes in a pillow image object, and a string for the desired format and saves in in that format
-# Ciaran
-# 5/14/2025
+# Class: CST 205
+# Abstract: This file has the function that enables users to save images in different formats. 
+#           It takes in a pillow image object, and a string for the desired format and saves in in that format
+# Author: Ciaran Moynihan
+# Class: 5/14/2025
 
 import os
 import io
