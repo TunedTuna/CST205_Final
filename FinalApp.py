@@ -1,3 +1,11 @@
+# Image Filter and Format Converter Web Application
+# CST 205
+# This is the main file that runs the web application.
+# It allows users to sign up, log in, edit images with filters, and download images in different formats.
+# Ciaran, Jasmeen, Josue, Daniel
+# 5/14/2025
+
+
 from flask import Flask, render_template, flash, redirect, send_file, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField
