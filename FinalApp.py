@@ -148,7 +148,7 @@ def edit_image():
             img.putdata(negativelist)
 
         elif selectedfilter == "3":  # grayscale filter
-            grayscalelist = [(((p[0]*299 + p[1]*587 + p[2]*114) // 1000,),) * 3 for p in img.getdata()]
+            grayscalelist = [((p[0]*299 + p[1]*587 + p[2]*114) // 1000,) * 3 for p in img.getdata()]
             img.putdata(grayscalelist)
 
         # Save using original filename
