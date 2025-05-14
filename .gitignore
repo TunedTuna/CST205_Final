@@ -34,8 +34,6 @@ env/
 
 # Ignore matplotlib plot output (images, saved plots, etc.)
 *.png
-*.jpg
-*.jpeg
 *.svg
 *.pdf
 
@@ -50,7 +48,6 @@ qtcore/
 *.gif
 *.tiff
 *.bmp
-*.jpeg
 
 # Ignore __feature__ directory or file
 __feature__
