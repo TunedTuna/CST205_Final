@@ -1,17 +1,20 @@
-from flask import Flask, render_template, flash, redirect
+from flask import Flask, render_template, flash, redirect, send_file, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField
 from wtforms.validators import DataRequired
 from datetime import datetime
 from flask import *
 import os
+import io
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user, UserMixin
 import json
 # from user_manager import... [this will import methods from the user_manager.py]
 import user_manager
-import image_saver
+from image_saver import get_image_download
 from flask_bootstrap import Bootstrap5
 from PIL import Image
+
+
 
 # create an instance of Flask
 app= Flask(__name__)
@@ -106,15 +109,10 @@ def logIn():
 def home():
     return render_template('home.html')
 
-
-
-@app.route('/edit', methods = ['GET', 'POST']) # editing the image
+@app.route('/edit', methods=['GET', 'POST'])  # editing the image
 @login_required
 def edit_image():
-
-    # if request.method == 'POST':
     if request.method == 'POST':
-     
         if 'file' not in request.files:
             return "No file uploaded"
 
@@ -124,67 +122,45 @@ def edit_image():
             return "No file selected"
 
         selectedfilter = request.form.get("filter")
-        selectedformat = request.form.get("format", "original")
+        print(f"User selected filter {selectedfilter}")
 
-        print(f"User selected filter {selectedfilter} and format {selectedformat}")
-
-        image = request.files["file"]
-       
         img = Image.open(image)
-        file_path = os.path.join(UPLOAD_FOLDER, image.filename)
-        img.save(file_path)
-        print(f"File saved to {file_path}")
-
         img = img.convert("RGB")
         width, height = img.size
-        width2, height2 = img.size # use later...
 
-        file_path = os.path.join(UPLOAD_FOLDER, image.filename)
-
-        if (selectedfilter == "1"): # sepia filter
-
-            for x in range (width):
-
-                for y in range (height):
-
+        if selectedfilter == "1":  # sepia filter
+            for x in range(width):
+                for y in range(height):
                     pixel = img.getpixel((x, y))
-
                     if pixel[0] < 63:
                         r, g, b = int(pixel[0] * 1.1), pixel[1], int(pixel[2] * 0.9)
-
-                    elif pixel[0] > 62 and pixel[0] < 192:
-                        r,g,b = int(pixel[0] * 1.15), pixel[1], int(pixel[2] * 0.85)
-
-                    else: # otherwise
+                    elif 62 < pixel[0] < 192:
+                        r, g, b = int(pixel[0] * 1.15), pixel[1], int(pixel[2] * 0.85)
+                    else:
                         r = int(pixel[0] * 1.08)
-                        g,b = pixel[1], int(pixel[2] * 0.5)
+                        g, b = pixel[1], int(pixel[2] * 0.5)
 
-                img.putpixel((x, y), (r, g, b))
-        
-        elif (selectedfilter == "2"): # negative filter
+                    img.putpixel((x, y), (r, g, b))
+
+
+        elif selectedfilter == "2":  # negative filter
             negativelist = [((255 - p[0]), (255 - p[1]), (255 - p[2])) for p in img.getdata()]
             img.putdata(negativelist)
 
-        elif (selectedfilter == "3"): # grayscale filter, luminosity method
-            grayscalelist = [(((p[0]*299) + (p[1]*587) + (p[2]*114)) // 1000,) * 3 for p in img.getdata()]
+        elif selectedfilter == "3":  # grayscale filter
+            grayscalelist = [(((p[0]*299 + p[1]*587 + p[2]*114) // 1000,),) * 3 for p in img.getdata()]
             img.putdata(grayscalelist)
 
-        if (selectedformat != "original"):
+        # Save using original filename
+        filename = image.filename
+        file_path = os.path.join(UPLOAD_FOLDER, filename)
+        img.save(file_path)
 
-            filename2 = f"{os.path.splitext(image.filename)[0]}.{selectedformat.lower()}"
+        print(f"File saved to {file_path}")
+        return redirect(url_for('results', filename=filename))
 
-            file_path = os.path.join(UPLOAD_FOLDER, filename2)
-            img.save(file_path, format=selectedformat.upper())
-            
-
-        else:
-            filename2 = image.filename  
-            file_path = os.path.join(UPLOAD_FOLDER, filename2)
-            img.save(file_path)
-        
-            print(f"File saved to {file_path}")
-            return redirect(url_for('results', filename= filename2))
     return render_template('upload.html')
+
 
 
 
@@ -201,6 +177,23 @@ def results():
 def uploaded_file(filename):
     return render_template(UPLOAD_FOLDER, filename)
 
+
+
+@app.route('/download/<filename>/<file_type>')
+@login_required
+def download_image(filename, file_type):
+    path = os.path.join('static/uploads', filename)
+
+    if not os.path.exists(path):
+        return "Image not found", 404
+    image = Image.open(path)
+
+    img_io, mimetype, download_name = get_image_download(
+        image=image,
+        file_type=file_type,
+        filename=filename.rsplit('.', 1)[0]
+    )
+    return send_file(img_io, mimetype=mimetype, as_attachment=True, download_name=download_name)
 
 
 @app.route('/profile', methods=('GET','POST'))
