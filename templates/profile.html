@@ -33,13 +33,14 @@
     {% if history %}
         <ul class="list-group">
             {% for entry in history %}
-                <li class="list-group-item">
-                    <strong>{{ entry.timestamp }}</strong>: {{ entry.action }}
-                    {% if entry.filename %}
-                        - <em>{{ entry.filename }}</em>
-                    {% endif %}
-                </li>
+              <li class="list-group-item">
+                  <strong>{{ entry.timestamp }}</strong>: {{ entry.action }}
+                  {% if entry.filename %}
+                      - <em>{{ entry.filename }}</em>
+                  {% endif %}
+              </li>
             {% endfor %}
+
         </ul>
     {% else %}
         <p>No history available.</p>

@@ -122,8 +122,15 @@ def edit_image():
         if image.filename == '':
             return "No file selected"
 
+        filter_names = {
+            "1": "Sepia",
+            "2": "Negative",
+            "3": "Grayscale"
+        }
+
         selectedfilter = request.form.get("filter")
-        print(f"User selected filter {selectedfilter}")
+        filter_name = filter_names.get(selectedfilter, "Unknown")
+
 
         img = Image.open(image)
         img = img.convert("RGB")
@@ -157,7 +164,7 @@ def edit_image():
         file_path = os.path.join(UPLOAD_FOLDER, filename)
         img.save(file_path)
 
-        log_user_action(current_user.id, f"Applied {selectedfilter} filter to image", filename)
+        log_user_action(current_user.id, f"Applied {filter_name} filter", filename)
 
         print(f"File saved to {file_path}")
         return redirect(url_for('results', filename=filename))
