@@ -30,7 +30,6 @@ app= Flask(__name__)
 
 app.config['SECRET_KEY']= 'csumb-otter'
 bootstrap = Bootstrap5(app)
-# UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'uploads')
 UPLOAD_FOLDER = os.path.join(app.root_path, 'static', 'uploads')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
@@ -48,16 +47,16 @@ class UserDataInput(FlaskForm):
 
 
 
-# flask_login stuff
+# flask_login
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = '/' 
-# flask_login stuff - class?
+# flask_login - class
 class User(UserMixin):
     def __init__(self, userName):
         self.id= userName 
 
-# flask_login stuff - their method?
+# flask_login 
 @login_manager.user_loader
 def load_user(user_id):
     user_data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'user_data.json')
@@ -72,7 +71,7 @@ def load_user(user_id):
 
 
 
-# route stuff
+# route 
 
 @app.route('/signUp',methods=('GET','POST')) # SIGN UP PAGE
 def signUp():
@@ -83,7 +82,7 @@ def signUp():
 
         if not user_manager.checkDupe(form.userName.data):
             print("✅ No duplicate found. Adding user.")
-            # user is UNIQUE-ish store them in "DB"
+            # user is UNIQUE store them in "DB"
             user_manager.addUser(form.userName.data,form.userPassword.data)
             # store_user(form.userName.data,form.userPassword.data)
             return redirect('/home')
@@ -182,7 +181,7 @@ def edit_image():
 
 
 
-@app.route('/results') # this where one see the image after editing
+@app.route('/results') # this is where one see the image after editing
 @login_required
 def results():
     filename = request.args.get('filename')
@@ -218,7 +217,7 @@ def download_image(filename, file_type):
     return send_file(img_io, mimetype=mimetype, as_attachment=True, download_name=download_name)
 
 
-@app.route('/profile', methods=('GET','POST'))
+@app.route('/profile', methods=('GET','POST')) # The profile page where user can see the history
 @login_required
 def profile():
     history = []

@@ -8,7 +8,7 @@
 
 **Class:** CST 205 Multimedia Design & Programming
 
-**Date of Completion:** May 13, 2025
+**Date of Completion:** May 14, 2025
 
 ### Project Overview
 This Flask web application allows users to:
