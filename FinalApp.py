@@ -13,6 +13,7 @@ import user_manager
 from image_saver import get_image_download
 from flask_bootstrap import Bootstrap5
 from PIL import Image
+from user_history import log_user_action
 
 
 
@@ -121,8 +122,15 @@ def edit_image():
         if image.filename == '':
             return "No file selected"
 
+        filter_names = {
+            "1": "Sepia",
+            "2": "Negative",
+            "3": "Grayscale"
+        }
+
         selectedfilter = request.form.get("filter")
-        print(f"User selected filter {selectedfilter}")
+        filter_name = filter_names.get(selectedfilter, "Unknown")
+
 
         img = Image.open(image)
         img = img.convert("RGB")
@@ -155,6 +163,8 @@ def edit_image():
         filename = image.filename
         file_path = os.path.join(UPLOAD_FOLDER, filename)
         img.save(file_path)
+
+        log_user_action(current_user.id, f"Applied {filter_name} filter", filename)
 
         print(f"File saved to {file_path}")
         return redirect(url_for('results', filename=filename))
@@ -193,13 +203,25 @@ def download_image(filename, file_type):
         file_type=file_type,
         filename=filename.rsplit('.', 1)[0]
     )
+
+    log_user_action(current_user.id, f"Downloaded image as {file_type.upper()}", filename)
+
+
     return send_file(img_io, mimetype=mimetype, as_attachment=True, download_name=download_name)
 
 
 @app.route('/profile', methods=('GET','POST'))
 @login_required
 def profile():
-    return render_template('profile.html')
+    history = []
+    try:
+        with open(os.path.join(os.path.dirname(__file__), 'user_history.json'), 'r') as file:
+            all_history = json.load(file)
+            history = all_history.get(current_user.id, [])
+    except FileNotFoundError:
+        pass
+    return render_template('profile.html', history=history)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
