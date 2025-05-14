@@ -47,6 +47,23 @@
 
               <a>Here is your image :D</a>
 
+              <p>Download as:</p>
+              <div class="d-flex gap-2">
+                <form method="get" action="{{ url_for('download_image', filename=filename, file_type='png') }}">
+                  <button type="submit" class="btn btn-success">PNG</button>
+                </form>
+
+                <form method="get" action="{{ url_for('download_image', filename=filename, file_type='jpg') }}">
+                  <button type="submit" class="btn btn-success">JPG</button>
+                </form>
+
+                <form method="get" action="{{ url_for('download_image', filename=filename, file_type='webp') }}">
+                  <button type="submit" class="btn btn-success">WEBP</button>
+                </form>
+              </div>
+
+
+
               {% endif %}
 
           </div>
