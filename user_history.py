@@ -1,8 +1,8 @@
 # Image Filter and Format Converter Web Application
-# CST 205
-# This file has the function that tracks user actions and save them to a JSON file
-# Ciaran
-# 5/14/2025
+# Class: CST 205
+# Abstract: This file has the function that tracks user actions and save them to a JSON file
+# Author: Ciaran Moynihan
+# Date: 5/14/2025
 
 import json
 import os
