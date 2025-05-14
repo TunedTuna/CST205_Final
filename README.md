@@ -17,10 +17,11 @@ This Flask web application allows users to:
 - Upload an image from their device
 - Choose an image filter (Sepia, Negative, Grayscale)
 - Convert the image format (e.g., png, jpeg, webp)
-- View the filtere image on the results page and download it
+- View the newly filtered image on the results page and, then download it
 
 ### How to run the program
-**Requirements:**
+
+**Requirements (run pip install):**
 - Flask
 - Flask-Bootstrap
 - Flask-Login
