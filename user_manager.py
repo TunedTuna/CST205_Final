@@ -1,6 +1,11 @@
-# this file will handle the checks n stuff for user log in
-# this file will import the file that holds userData
+#Image Filter and Format Converter Web Application
+#  CST 205
+# This file will handle the checks n stuff for user log in
+# This file will import the file that holds userData
+#  Daniel
+#  5/14/2025
 #Lecture: CST 205 APIs
+
 import json
 import os
 
