@@ -39,6 +39,8 @@ This Flask web application allows users to:
 
 **Trello:** [Team 8243 Trello Board](https://trello.com/invite/b/67fd89a93b774dd96089a407/ATTI217d27352430a46c72e71dd4d406fa8aC33350F6/cst-205-group-8243)
 
+**Google Slides:** [Google Slides for Team 8243](https://docs.google.com/presentation/d/1dNghghqVVkQH6Gu0nd3Uh69-lXheeIVCuhf6c9H_Sts/edit?usp=sharing)
+
 ### Future Work
 - Undo and Redo functionality for edits
 - Enable additional image editing features
