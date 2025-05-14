@@ -1,9 +1,9 @@
 # Image Filter and Format Converter Web Application
-# CST 205
-# This is the main file that runs the web application.
-# It allows users to sign up, log in, edit images with filters, and download images in different formats.
-# Ciaran, Jasmeen, Josue, Daniel
-# 5/14/2025
+# Class: CST 205
+# Abstract: This is the main file that runs the web application.
+#           It allows users to sign up, log in, edit images with filters, and download images in different formats.
+# Authors: Ciaran Moynihan, Jasmeen Hothi, Josue Nava, Daniel Rodas
+# Date: 5/14/2025
 
 
 from flask import Flask, render_template, flash, redirect, send_file, url_for
